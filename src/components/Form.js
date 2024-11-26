@@ -2,6 +2,9 @@ import { Component } from "../core/Component";
 
 export class Form extends Component {
   setup(props) {
+    props = {
+      onSubmint: this.onItemCreate,
+    };
     this.state = {
       amount: "",
     };
@@ -31,13 +34,15 @@ export class Form extends Component {
   }
 
   handleSubmit(event) {
-    // ...
     event.preventDefault();
     if (this.isValid) {
-      console.log("Форма отправлена с суммой:", this.state.amount);
-
+      console.log(
+        "Форма отправлена с суммой:",
+        this.props.onSubmint(this.state.amount)
+      );
       this.state.amount = "";
       this.$input.value = "";
     }
+    console.log(this.isValid);
   }
 }
